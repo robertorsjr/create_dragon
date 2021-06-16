@@ -1,8 +1,8 @@
-import React from 'react';
-import { Text } from 'react-native';
+import React from "react";
+import { Login } from "./screens";
 
 function App() {
-  return <Text>olá</Text>;
+  return <Login />;
 }
 
 export default App;

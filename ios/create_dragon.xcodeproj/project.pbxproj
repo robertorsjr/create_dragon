@@ -145,7 +145,6 @@
 				B2BB6B5F37CCD97D0A7ED323 /* Pods-create_dragon-create_dragonTests.debug.xcconfig */,
 				23FBA2BC1B2DB46F35971F53 /* Pods-create_dragon-create_dragonTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
