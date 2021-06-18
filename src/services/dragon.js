@@ -1,4 +1,4 @@
-import api, { endpoints } from "./index";
+import api, { endpoints } from './index';
 
 export async function getListDragons() {
   const { get } = api;

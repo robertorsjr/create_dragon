@@ -1,5 +1,5 @@
-import styled from "styled-components/native";
-import { Colors } from "../../resources";
+import styled from 'styled-components/native';
+import { Colors } from '../../resources';
 
 const InputText = styled.TextInput`
   height: 40px;

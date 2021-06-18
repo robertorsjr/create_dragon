@@ -1,27 +1,23 @@
-import React, { useState } from "react";
-import { Container, Text } from "./styles";
-import { Image } from "react-native";
-import { logo } from "../../utils/imagesUrl";
-import { Input, Separator } from "../../components";
-import { createDragon, deleteDragon } from "../../services/dragon";
-import { Button } from "../../components";
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { Container } from './styles';
+import { Image } from 'react-native';
+import { logo } from '../../utils/imagesUrl';
+import { Input, Separator } from '../../components';
+import { Button } from '../../components';
+import { requestLogin } from '../../store/ducks/login';
 
-function Login() {
-  const [show, setShow] = useState(false);
-  const [email, setEmail] = useState();
+function Login({ navigation }) {
+  const dispatch = useDispatch();
+  const [login, setLogin] = useState();
   const [password, setPassword] = useState();
-  const [dragons, setDragons] = useState();
 
   async function handleChange() {
-    try {
-      await createDragon({
-        name: email,
-        type: password,
-      });
-      console.warn("criou");
-    } catch (error) {
-      console.warn("errou");
-    }
+    const user = {
+      login,
+      password,
+    };
+    dispatch(requestLogin(user));
   }
 
   return (
@@ -33,16 +29,22 @@ function Login() {
         }}
         source={{ uri: logo }}
       />
-      <Separator y={60} />
-      <Input placeholder="User" onChangeText={setEmail} value={email} />
+      <Separator y={45} />
       <Input
-        placeholder="Password"
+        placeholder="Usuário"
+        autoCapitalize="none"
+        onChangeText={setLogin}
+        value={login}
+      />
+      <Input
+        placeholder="Senha"
         onChangeText={setPassword}
-        autoCompleteType="password"
+        autoCapitalize="none"
+        secureTextEntry={true}
         value={password}
       />
-      <Separator y={10} />
-      <Button onPress={handleChange} text={"Login"} />
+      <Separator y={20} />
+      <Button onPress={handleChange} text={'Login'} />
     </Container>
   );
 }
