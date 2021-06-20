@@ -1,4 +1,5 @@
 import { deleteDragon } from '../../services/dragon';
+import { requestListDragons } from './list';
 
 const Types = {
   REQUEST: 'deleteDragon/REQUEST',
@@ -37,6 +38,7 @@ export function requestDeleteDragon(id) {
     dispatch(Creators.request());
     try {
       const response = await deleteDragon(id);
+      dispatch(requestListDragons());
       dispatch(Creators.requestSuccess(response.data));
     } catch (error) {
       dispatch(Creators.requestFailure());

@@ -3,14 +3,19 @@ import { Icon } from 'react-native-elements';
 import { useDispatch, useSelector } from 'react-redux';
 import { Text, Container, List, Item } from './styles';
 import { requestListDragons } from '../../store/ducks/list';
-import { Button, Loading, Row, Separator } from '../../components';
-import { signOut } from '../../store/ducks/login';
+import {
+  Button,
+  EmptyList,
+  Loading,
+  Row,
+  Separator,
+  UtilBar,
+} from '../../components';
 import { requestDeleteDragon } from '../../store/ducks/delete';
 import { Colors } from '../../resources';
 import { formatDate } from '../../utils/format';
 
 function ListDragons({ navigation }) {
-  const [isClicked, setClicked] = useState(false);
   const data = useSelector(({ listDragonsState }) => listDragonsState.data);
   const loading = useSelector(
     ({ listDragonsState }) => listDragonsState.loading,
@@ -19,13 +24,11 @@ function ListDragons({ navigation }) {
 
   useEffect(() => {
     dispatch(requestListDragons());
-    setClicked(false);
-  }, [dispatch, isClicked]);
+  }, [dispatch]);
 
   async function handleDeleteDragon(id) {
     try {
       await dispatch(requestDeleteDragon(id));
-      setClicked(true);
     } catch (error) {
       console.warn(error);
     }
@@ -43,44 +46,42 @@ function ListDragons({ navigation }) {
 
   return (
     <Container>
-      <List
-        data={data}
-        keyExtractor={data => data.id}
-        renderItem={({ item }) => (
-          <Item>
-            <Row flexDirection="row">
-              <Row>
-                <Text>Nome: {item.name}</Text>
-                <Text>Tipo: {item.type}</Text>
-                <Text>Criação: {formatDate(item.createdAt)}</Text>
-              </Row>
+      {data.length > 0 ? (
+        <List
+          data={data}
+          keyExtractor={data => data.id}
+          renderItem={({ item }) => (
+            <Item>
               <Row flexDirection="row">
-                <Icon
-                  name="edit"
-                  color={Colors.softWhite}
-                  onPress={() => handleEditDragon(item.id)}
-                />
-                <Separator x={30} />
-                <Icon
-                  name="delete"
-                  color={Colors.darkRed}
-                  onPress={() => handleDeleteDragon(item.id)}
-                />
+                <Row>
+                  <Text>Nome: {item.name}</Text>
+                  <Text>Tipo: {item.type}</Text>
+                  <Text>Criação: {formatDate(item.createdAt)}</Text>
+                </Row>
+                <Row flexDirection="row">
+                  <Icon
+                    name="edit"
+                    color={Colors.softWhite}
+                    onPress={() => handleEditDragon(item.id)}
+                  />
+                  <Separator x={30} />
+                  <Icon
+                    name="delete"
+                    color={Colors.darkRed}
+                    onPress={() => handleDeleteDragon(item.id)}
+                  />
+                </Row>
               </Row>
-            </Row>
-          </Item>
-        )}
-      />
-      <Separator y={20} />
-      <Row flexDirection="row">
-        <Button text="Sair" onPress={() => dispatch(signOut())} />
-        <Separator y={20} />
-        <Button
-          text="Criar Dragão"
-          onPress={() => navigation.navigate('createDragon')}
+            </Item>
+          )}
         />
-      </Row>
-      <Separator y={20} />
+      ) : (
+        <EmptyList />
+      )}
+
+      <Separator y={10} />
+      <UtilBar navigation={navigation} />
+      <Separator y={10} />
     </Container>
   );
 }

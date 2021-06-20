@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { Container } from './styles';
+
 import { Button, Input, Loading, Separator } from '../../components';
 import { useDispatch, useSelector } from 'react-redux';
 import { requestCreateDragon } from '../../store/ducks/create';
 import { requestUpdateDragon } from '../../store/ducks/update';
 
-function CreateDragon({ route }) {
+function CreateDragon({ route, navigation }) {
   const [name, setName] = useState();
   const [type, setType] = useState();
   const data = useSelector(({ listDragonsState }) => listDragonsState.data);
@@ -29,10 +30,15 @@ function CreateDragon({ route }) {
       name,
       type,
     };
-    if (hasItem) {
-      return dispatch(requestUpdateDragon(dragon.id, dragon));
-    } else {
-      return dispatch(requestCreateDragon(dragon));
+    try {
+      dispatch(
+        hasItem
+          ? requestUpdateDragon(dragon.id, dragon)
+          : requestCreateDragon(dragon),
+      );
+      navigation.goBack();
+    } catch (error) {
+      return false;
     }
   }
 

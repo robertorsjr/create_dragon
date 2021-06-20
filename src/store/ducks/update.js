@@ -1,4 +1,5 @@
 import { updateDragon } from '../../services/dragon';
+import { requestListDragons } from './list';
 
 const Types = {
   REQUEST: 'updateDragon/REQUEST',
@@ -37,6 +38,7 @@ export function requestUpdateDragon(id, data) {
     dispatch(Creators.request());
     try {
       const response = await updateDragon(id, data);
+      dispatch(requestListDragons());
       dispatch(Creators.requestSuccess(response.data));
     } catch (error) {
       dispatch(Creators.requestFailure());
