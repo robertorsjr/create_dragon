@@ -44,7 +44,7 @@ function Login({ navigation }) {
         value={password}
       />
       <Separator y={20} />
-      <Button onPress={handleChange} text={'Login'} />
+      <Button onPress={handleChange} text={'Entrar'} />
     </Container>
   );
 }
