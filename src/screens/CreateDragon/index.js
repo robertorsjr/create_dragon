@@ -14,7 +14,7 @@ function CreateDragon({ route, navigation }) {
     ({ listDragonsState }) => listDragonsState.loading,
   );
   const dispatch = useDispatch();
-  const hasItem = route.name === 'editDragon';
+  const hasItem = route.params;
 
   useEffect(() => {
     if (hasItem) {

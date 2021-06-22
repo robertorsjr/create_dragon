@@ -1,13 +1,14 @@
-import styled from "styled-components/native";
-import { Colors } from "../../resources";
+import styled from 'styled-components/native';
+import { Colors } from '../../resources';
+import { Pressable } from 'react-native';
 
-const Btn = styled.TouchableOpacity`
+const Btn = styled(Pressable)`
   background: ${Colors.turquoise};
   height: 50px;
   width: 150px;
   align-items: center;
   justify-content: center;
-  border-radius: 10px;
+  border-radius: 25px;
 `;
 
 const Text = styled.Text`

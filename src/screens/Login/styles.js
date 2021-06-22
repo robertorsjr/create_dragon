@@ -10,7 +10,8 @@ const Container = styled.SafeAreaView`
 
 const Text = styled.Text`
   font-size: 20px;
-  color: ${Colors.black};
+  font-weight: 700;
+  color: ${Colors.turquoise};
 `;
 
 export { Container, Text };

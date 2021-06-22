@@ -1,13 +1,11 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { Container } from './styles';
-import { Image } from 'react-native';
-import { logo } from '../../utils/imagesUrl';
+import { Container, Text } from './styles';
 import { Input, Separator } from '../../components';
 import { Button } from '../../components';
 import { requestLogin } from '../../store/ducks/login';
 
-function Login({ navigation }) {
+function Login() {
   const dispatch = useDispatch();
   const [login, setLogin] = useState();
   const [password, setPassword] = useState();
@@ -22,14 +20,8 @@ function Login({ navigation }) {
 
   return (
     <Container>
-      <Image
-        style={{
-          width: 400,
-          height: 200,
-        }}
-        source={{ uri: logo }}
-      />
-      <Separator y={45} />
+      <Text>Create_Dragon</Text>
+      <Separator y={35} />
       <Input
         placeholder="Usuário"
         autoCapitalize="none"

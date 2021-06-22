@@ -60,6 +60,8 @@ export function requestLogin(data) {
       if (login === 'admin' && password === 'admin') {
         await AsyncStorage.setItem('logged', 'true');
         dispatch(Creators.requestSuccess(true));
+      } else {
+        dispatch(Creators.requestFailure());
       }
     } catch (error) {
       dispatch(Creators.requestFailure());

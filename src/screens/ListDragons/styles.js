@@ -1,6 +1,6 @@
 import styled from 'styled-components/native';
-
 import { Colors } from '../../resources';
+import { FlatList } from 'react-native-gesture-handler';
 
 const Container = styled.View`
   flex: 1;
@@ -15,20 +15,32 @@ const Text = styled.Text`
   text-align: center;
   align-self: flex-start;
   margin-bottom: 20px;
-  color: ${Colors.white};
+  color: ${Colors.black};
 `;
 
-const List = styled.FlatList`
-  padding: 20px;
+const List = styled(FlatList).attrs(props => ({
+  contentContainerStyle: {
+    padding: 20,
+  },
+}))`
   width: 100%;
 `;
 
 const Item = styled.View`
   padding: 20px;
-  background: ${Colors.turquoise};
+  background: ${Colors.white};
   height: 140px;
-  margin-bottom: 20px;
   border-radius: 10px;
+
+  shadow-color: #000;
+  shadow-offset: {
+    width: 0;
+    height: 5px;
+  }
+  shadow-opacity: 0.36;
+  shadow-radius: 6.68;
+
+  elevation: 11;
 `;
 
 export { Container, Text, List, Item };

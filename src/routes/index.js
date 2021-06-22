@@ -3,7 +3,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { ListDragons, Login, CreateDragon } from '../screens';
 import { useDispatch, useSelector } from 'react-redux';
 import { checkIsLogged } from '../store/ducks/login';
-import { Loading } from '../components';
+import { BackButton, Loading } from '../components';
 
 const Stack = createStackNavigator();
 
@@ -33,28 +33,23 @@ export default function Routes() {
               headerStyle: {
                 shadowColor: 'transparent',
               },
+              headerRight: () => <BackButton />,
             }}
           />
           <Stack.Screen
             name="createDragon"
             component={CreateDragon}
-            options={{
-              title: 'Criar Dragão',
-              headerStyle: {
-                shadowColor: 'transparent',
-                backgroundColor: '#FFFFFF',
-              },
-            }}
-          />
-          <Stack.Screen
-            name="editDragon"
-            component={CreateDragon}
-            options={{
-              title: 'Editar Dragão',
-              headerStyle: {
-                shadowColor: 'transparent',
-                backgroundColor: '#FFFFFF',
-              },
+            options={navigation => {
+              return {
+                title: navigation.route.params
+                  ? 'Editar Dragão'
+                  : 'Criar Dragão',
+                headerBackTitle: 'Voltar',
+                headerStyle: {
+                  shadowColor: 'transparent',
+                  backgroundColor: '#FFFFFF',
+                },
+              };
             }}
           />
         </>

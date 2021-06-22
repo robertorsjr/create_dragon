@@ -1,5 +1,5 @@
-import React from "react";
-import { Btn, Text } from "./styles";
+import React from 'react';
+import { Btn, Text } from './styles';
 
 function Button({ text, ...props }) {
   return (

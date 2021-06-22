@@ -5,7 +5,7 @@ import { Container } from './styles';
 function Loading() {
   return (
     <Container>
-      <ActivityIndicator />
+      <ActivityIndicator size={'large'} />
     </Container>
   );
 }
